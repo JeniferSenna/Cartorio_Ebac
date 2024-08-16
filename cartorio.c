@@ -12,7 +12,9 @@ int registro(){ //função responsável por resgistrar novos usuários
 	char nome[40];
 	char sobrenome[40];
 	char cargo[40];
+	
 	//final da definição das variáveis
+	
 	
 	printf("Digite o cpf a ser cadastrado: ");//texto informativo de comando ao usuário
 	scanf("%s", cpf);//para pegar a informação digitada pelo usuário
@@ -79,12 +81,14 @@ int consulta(){ //função responsável por mostrar a pesquisa da cosulta de usuári
 	if(file == NULL){// se o arquivo for igual a nulo (não existir)
 		printf("CPF não localizado! Não foi possível abrir o arquivo!\n");
 		//informar ao usuário que os dados digitados não existem
+		system("pause");
 	}
 	
 	while(fgets(conteudo,200,file) != NULL){//caso os dados sejam encontrados
 		printf("\nEssas são as informações do usuário: \n");//informar dados ao usuário
 		printf("%s",conteudo);//informação de dados ao usuário
-		printf("\n\n");
+		printf("\n");	
+		
 	}
 	
 	fclose(file);//fechamento do arquivo
@@ -130,7 +134,8 @@ int main(){ //função principal
 		printf("Escolha a opção desejada do menu:\n\n");
 		printf("\t1 - Registrar Nome\n");
 		printf("\t2 - Consultar Nome\n");
-		printf("\t3 - Deletar Nome\n\n");
+		printf("\t3 - Deletar Nome\n");
+		printf("\t4 - Sair e fechar programa\n\n");
 		printf("Opção: "); // final do menu
 	
 		scanf("%d", &opcao); // usado para armazenar a opção do usuário
@@ -148,6 +153,11 @@ int main(){ //função principal
 			
 			case 3:// caso o usuário digite 3 ir para a página de deletar
 			deletar();	
+			break;
+			
+			case 4:// caso o usuário digite 4 fechar o programa
+			printf("Obrigada por utilizar o sistema!\n");
+			return 0;
 			break;
 			
 			default:// caso o usuário digite qualquer tecla diferente das anteriores
