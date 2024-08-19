@@ -65,37 +65,72 @@ int registro(){ //função responsável por resgistrar novos usuários
 
 
 
-int consulta(){ //função responsável por mostrar a pesquisa da cosulta de usuário
+int consulta(){ // função responsável por realiar a consulta de usuários
 	
-	setlocale(LC_ALL,"Portuguese");// para definir a linguagem
+	setlocale(LC_ALL,"Portuguese");// definição da localização
 	
-	char cpf[40];// definindo as variáveis
-	char conteudo[300];// definindo as variáveis
+	//iniício da definição das variáveis
+	char cpf[40];
+	char conteudo[200];
 	
-	printf("Digite o CPF que deseja consultar: ");//informação de comando para o usuário
-	scanf("%s",cpf);// responsável por pegar a informação digitada pelo usuário
+	int escolha = 0;
+	// final da definição das variáveis
+	
+	system("cls");// para limpar a tela
+	
+	printf("Digite o CPF a ser consultado: ");
+	scanf("%s",cpf);// para pegar a escolha digitada pelo usuário
 	
 	FILE *file;// abrir arquivo
-	file = fopen(cpf,"r");// abrir arquivo e ler
+	file = fopen(cpf,"r");// abrir arquivo, "r" ler o arquivo
 	
-	if(file == NULL){// se o arquivo for igual a nulo (não existir)
-		printf("CPF não localizado! Não foi possível abrir o arquivo!\n");
-		//informar ao usuário que os dados digitados não existem
-		system("pause");
-	}
-	
-	while(fgets(conteudo,200,file) != NULL){//caso os dados sejam encontrados
-		printf("\nEssas são as informações do usuário: \n");//informar dados ao usuário
-		printf("%s",conteudo);//informação de dados ao usuário
-		printf("\n");	
+	if(file == NULL){// se a opção for igual a nulo, não existir
+		printf("\nCPF não localizado! Não foi possível abrir o arquivo!\n\n");
+		// informar que os dados não foram encontrados
+		// logo abaixo dar a opção de realisar outra pesquisa ou voltar ao menu
+		printf("Deseja realizar outra consulta?\n");
+		printf("\t1 - SIM\n");// opção
+		printf("\t2 - VOLTAR AO MENU\n");// opção
+		
+		scanf("%d", &escolha);// pegar opção do usuário
+		
+		if(escolha == 1){// se a escolha for 1, retornar a nova consulta
+			consulta();
+		}
+		
+		if(escolha == 2){// se a opção for 2, retornar ao menu
+			main();
+		}
 		
 	}
 	
-	fclose(file);//fechamento do arquivo
+	while(fgets(conteudo,200,file) != NULL	){
+		printf("\nEssas são as informações do usuário:\n\n");
+		printf("%s",conteudo);// mostra informações dos dados pesquisados
+		printf("\n\n");//quebra de linha
+		// após dar a opção de realizar nova pesquisa ou voltar ao menu
+		printf("Deseja realizar outra consulta?\n");
+		printf("\t1 - SIM\n");// opção 1
+		printf("\t2 - VOLTAR AO MENU\n");// opção 2
+		
+		scanf("%d", &escolha);// pega opção do usuário
+		
+		if(escolha == 1){// se a escolha for 1, realizar nova consulta
+			consulta();
+		}
+		
+		if(escolha == 2){// se a escolha por 2, voltar ao menu
+			main();
+		}
+		
+		
+	}
+	
+	fclose(file);
 	
 	system("pause");
 	
-} // fechamento da função consulta()
+}// fechamento da função consulta
 
 
 int deletar(){ //função responsável por excluir dados de usuário
@@ -156,7 +191,7 @@ int main(){ //função principal
 			break;
 			
 			case 4:// caso o usuário digite 4 fechar o programa
-			printf("Obrigada por utilizar o sistema!\n");
+			printf("Obrigado por utilizar o sistema!\n");
 			return 0;
 			break;
 			
